@@ -17,7 +17,6 @@ from aioWiserHeatAPI.wiserhub import WiserAPI
 import voluptuous as vol
 
 from homeassistant import config_entries, exceptions
-from homeassistant.components import zeroconf
 from homeassistant.const import (
     CONF_HOST,
     CONF_NAME,
@@ -117,7 +116,7 @@ class WiserFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     @callback
     def async_get_options_flow(config_entry):
         """Return flow options."""
-        return WiserOptionsFlowHandler(config_entry)
+        return WiserOptionsFlowHandler()
 
     async def async_step_user(self, user_input=None):
         """Handle a Wiser Heat Hub config flow start.
