@@ -1,10 +1,9 @@
-# Wiser Home Assistant Integration v3.4.17
+# Wiser Home Assistant Integration v3.4.18
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
 [![downloads](https://shields.io/github/downloads/asantaga/wiserHomeAssistantPlatform/latest/total?style=for-the-badge)](https://github.com/asantaga/wiserHomeAssistantPlatform)
 [![version](https://shields.io/github/v/release/asantaga/wiserHomeAssistantPlatform?style=for-the-badge)](https://github.com/asantaga/wiserHomeAssistantPlatform)
 [![Latest Release](https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=41BDF5&logo=home-assistant&label=integration%20usage&suffix=%20installs&cacheSeconds=15600&url=https://analytics.home-assistant.io/custom_integrations.json&query=$.wiser.total)](https://analytics.home-assistant.io/custom_integrations.json)
-
 
 This repository contains a Home Assistant integration for the awesome Drayton Wiser Heating solution. This integration works locally with your wiser hub and does not rely on the cloud.
 
@@ -31,6 +30,17 @@ For more information checkout the AMAZING community thread available on
 
 ## Change log
 
+- v3.4.18
+
+  - Fixed no long term stats for temp/humidity sensors issue [#598](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/598)
+  - Fixed deprecated ZeroconfServiceInfo - issue [#612](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/612)
+  - Fixed error 500 when selecting integration config - issue [#613](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/613)
+  - Fixed unable to create new schedule card - issue [#616](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/616)
+  - Fixed schedule card badges are misaligned - issue [#615](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/615)
+  - Changed: Communication to v2 hub now uses https over internal network
+  - Bumped schedule card to v1.5.0
+  - Bumped api to v1.7.0
+
 - v3.4.17
 
   - Fixed hot water climate does not respect away mode - issue [#579](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/579)
@@ -39,7 +49,7 @@ For more information checkout the AMAZING community thread available on
 
 - v3.4.16
 
-- Fix incorrect identifer on hub device
+  - Fix incorrect identifer on hub device
   - Fix deprecation warning for access to lovelace resource parameters
   - Fix error on unloading services for hubs without hot water control
   - Fix deprecation warning for ZeroconfServiceInfo
