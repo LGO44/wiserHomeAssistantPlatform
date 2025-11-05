@@ -1582,6 +1582,10 @@ class WiserThresholdTempSensor(WiserThresholdSensor):
         return SensorDeviceClass.TEMPERATURE
 
     @property
+    def state_class(self):
+        return SensorStateClass.MEASUREMENT
+
+    @property
     def name(self):
         """Return the name of the sensor."""
         return f"{get_device_name(self._data, self._device_id)} Temperature"
@@ -1599,6 +1603,10 @@ class WiserThresholdHumiditySensor(WiserThresholdSensor):
     def device_class(self):
         """Return sensor device class."""
         return SensorDeviceClass.HUMIDITY
+
+    @property
+    def state_class(self):
+        return SensorStateClass.MEASUREMENT
 
     @property
     def name(self):
