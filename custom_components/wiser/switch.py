@@ -225,6 +225,16 @@ async def async_setup_entry(hass: HomeAssistant, config_entry, async_add_entitie
                         ),
                     ]
                 )
+    
+    # Add Wiser Automation (if any)
+    for automation in data.wiserhub.automations.all:
+        wiser_switches.extend(
+            [
+                WiserAutomationSwitch(data,f"{automation.name}", "enabled", "mdi:check-circle",automation.id),
+                WiserAutomationSwitch(data,f"{automation.name}", "enable_notification", "mdi:notification-clear-all",automation.id),
+            ]
+        ) 
+
 
     # Add Room passive mode switches
     if data.enable_automations_passive_mode:
@@ -1116,3 +1126,82 @@ class WiserHWClimateManualHeatSwitch(WiserSwitch):
         """Turn off hw climate manual heat."""
         await self._data.wiserhub.hotwater.set_manual_heat(False)
         await self.async_force_update()
+
+
+class WiserAutomationSwitch(WiserSwitch):
+    """Switch to set the status of an automation switch"""
+
+    def __init__(self, data, name, key, icon,automation_id) -> None:
+        """Initialize the sensor."""
+        self._name = name
+        self._automation_id= automation_id
+        self._key= key
+        self._icon = icon
+        super().__init__(data, name, key, "automation", icon)
+        self._automation = self._data.wiserhub.automations.get_by_automation_id(self._automation_id)
+        self._is_on = getattr(self._automation, self._key)
+
+    @callback
+    def _handle_coordinator_update(self) -> None:
+        """Async Update to HA."""
+        super()._handle_coordinator_update()
+        self._is_on = getattr(self._automation, self._key)        
+        self._automation = self._data.wiserhub.automations.get_by_automation_id(self._automation_id)
+        self.async_write_ha_state()
+
+    @hub_error_handler
+    async def async_turn_on(self, **kwargs):
+        """Turn the automation on."""
+
+        if self._key == "enabled":
+            await self._automation.set_enabled(True)
+        elif self._key == "enable_notification":             
+            await self._automation.set_enable_notification(True)
+
+        await self.async_force_update(2)
+        return True
+
+    @hub_error_handler
+    async def async_turn_off(self, **kwargs):
+        """Turn the automation off."""
+
+        if self._key == "enabled":
+            await self._automation.set_enabled(False)
+        elif self._key == "enable_notification":             
+            await self._automation.set_enable_notification(False)
+
+        await self.async_force_update(2)
+        return True
+
+    @property
+    def name(self):
+        """Return the name of the Device."""
+        return f"Wiser Automation {self._name} {self._key}"
+
+
+    @property
+    def icon(self):
+        """Return the icon of the automation."""
+        return self._icon
+
+    @property
+    def device_info(self):
+        """Return device specific attributes."""
+        return {
+            "name": get_device_name(self._data, 0),
+            "identifiers": {(DOMAIN, get_identifier(self._data, 0))},
+            "manufacturer": MANUFACTURER_SCHNEIDER,
+            "model": self._data.wiserhub.system.product_type,
+            "sw_version": self._data.wiserhub.system.firmware_version,
+            "via_device": (DOMAIN, self._data.wiserhub.system.name),
+        }
+
+    @property
+    def extra_state_attributes(self):
+        """Return the device state attributes for the attribute card."""
+        attrs = {}
+        attrs["automation_name"] = self._automation.name
+        attrs["automation_id"] = self._automation.id
+        attrs["automation_enabled"] = self._automation.enabled
+        attrs["automation_notification"] = self._automation.enable_notification
+        return attrs
