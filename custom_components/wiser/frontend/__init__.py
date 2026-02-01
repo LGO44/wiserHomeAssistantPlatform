@@ -5,7 +5,8 @@ import os
 from pathlib import Path
 
 from homeassistant.components.http import StaticPathConfig
-from homeassistant.components.lovelace import LovelaceData
+from homeassistant.components.lovelace import MODE_STORAGE, LovelaceData
+from homeassistant.const import MAJOR_VERSION, MINOR_VERSION
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.event import async_call_later
 
@@ -22,10 +23,18 @@ class JSModuleRegistration:
         self.hass = hass
         self.lovelace: LovelaceData = self.hass.data.get("lovelace")
 
+        # Fix for change to name of mode to reousrce_mode in 2026.2
+        if MAJOR_VERSION >= 2026 and MINOR_VERSION >= 2:
+            self.resource_mode = self.lovelace.resource_mode
+        else:
+            self.resource_mode = self.lovelace.mode
+
     async def async_register(self):
         """Register view_assist path."""
         await self._async_register_path()
-        if self.lovelace.mode == "storage":
+
+
+        if self.lovelace and self.resource_mode == MODE_STORAGE:
             await self._async_wait_for_lovelace_resources()
 
     # install card resources
@@ -119,7 +128,7 @@ class JSModuleRegistration:
 
     async def async_unregister(self):
         """Unload lovelace module resource."""
-        if self.lovelace.mode == "storage":
+        if self.resource_mode == MODE_STORAGE:
             for module in JSMODULES:
                 url = f"{URL_BASE}/{module.get('filename')}"
                 wiser_resources = [
