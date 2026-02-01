@@ -1,4 +1,4 @@
-# Wiser Home Assistant Integration v3.4.18
+# Wiser Home Assistant Integration v3.4.19
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
 [![downloads](https://shields.io/github/downloads/asantaga/wiserHomeAssistantPlatform/latest/total?style=for-the-badge)](https://github.com/asantaga/wiserHomeAssistantPlatform)
@@ -30,8 +30,11 @@ For more information checkout the AMAZING community thread available on
 
 ## Change log
 
-- v3.4.18
+- v3.4.19
+  - Fixed: Breaking change in HA 2026.2 causes integration not to load - issue [#643](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/643)
+  - Fixed: V2 hubs with firmware lower than 4.42.23 cannot connect on https
 
+- v3.4.18
   - Fixed no long term stats for temp/humidity sensors issue [#598](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/598)
   - Fixed deprecated ZeroconfServiceInfo - issue [#612](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/612)
   - Fixed error 500 when selecting integration config - issue [#613](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/613)
@@ -42,13 +45,11 @@ For more information checkout the AMAZING community thread available on
   - Bumped api to v1.7.0
 
 - v3.4.17
-
   - Fixed hot water climate does not respect away mode - issue [#579](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/579)
   - Fixed deprecation error sets option flow config_entry explicitly - issue [#595](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/595)
   - Fixed schedule card unable to edit - issue [#607](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/607)
 
 - v3.4.16
-
   - Fix incorrect identifer on hub device
   - Fix deprecation warning for access to lovelace resource parameters
   - Fix error on unloading services for hubs without hot water control
@@ -56,7 +57,6 @@ For more information checkout the AMAZING community thread available on
   - Bump api to v1.6.6 to support SSL for future firmware
 
 - v3.4.15
-
   - Added experimental hw climate mode to operate differently. See wiki for details
   - Changed min/max hw climate temp range from 40-80C to 10-80C - issue [#545](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/545)
   - Fixed issue whereby hw climate errors if temp sensor not available after HA start - issue [#541](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/541)
@@ -64,12 +64,10 @@ For more information checkout the AMAZING community thread available on
   - Fixed issue whereby hw min does not change when setting both via service call if temps are 1C or less different - issue [#547](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/547)
 
 - v3.4.14
-
   - Fixed issue causing integration not to load in some circumstances due to failed config entry migration - issue #539
   - Added binary sensor active state sensor
 
 - v3.4.13
-
   - Added support for PowerTag C - issue #528
   - BREAKING CHANGE - refactored HW climate automation - issues #481, #490. See wiki for updated instructions
   - Added illuminance, humidity and temp sensors to devices with threshold sensors - issue #531
@@ -83,7 +81,6 @@ For more information checkout the AMAZING community thread available on
   - Bumped aiowiserheatapi to v1.6.3
 
 - v3.4.12
-
   - Fixed issue assigning schedules with non ascii characters in name - issue #509
   - Fixed error when using HotWater climate automation - issue #517
   - Fixed wiser http path not registering - issue #521
@@ -92,16 +89,13 @@ For more information checkout the AMAZING community thread available on
   - Bump api to v1.5.19 to resolve issues #509, #523, #524
 
 - v3.4.11
-
   - Bump api to v1.5.18 to reduce Payload not completed errors
   - Fix typo in dimable light color mode - issue #518
 
 - v3.4.10
-
   - Fixed error loading sensors - issue #513
 
 - v3.4.9 (Pulled)
-
   - Fixed smoke alarm naming issue - issue #496
   - Set humidity to Unavailable if no value - issue #503
   - Add support for BoilerInterface - issue #499
@@ -109,14 +103,12 @@ For more information checkout the AMAZING community thread available on
   - Add support for CFMT device for v2 hub - issue #507
 
 - v3.4.8
-
   - Fix deprecation warning no waiting on setups - [#485](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/485)
   - Fix color mode issue - [#479](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/479)
   - Added smoke alarm sensors - [#457](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/457)
   - Fixed missing save layout button in zigbee card - [#488](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/488)
 
 - v3.4.7
-
   - Bump api to v1.5.14 to improve handling of hub connection errors
   - Fix - improve handling of hub update failures - [#434](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/434)
   - Fix - set entity values to unknown if not provided in the hub update - [#471](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/471)
@@ -126,7 +118,6 @@ For more information checkout the AMAZING community thread available on
   - Add ability to unassign a schedule via the assign schedule service - [#470](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/470)
 
 - v3.4.6
-
   - Bump api to v1.5.13 to improve retry handling to include hub conneciton error
   - Prevent entities going unavailable if hub update failed
   - Fix issue with floor temp offset slider not loading
@@ -135,7 +126,6 @@ For more information checkout the AMAZING community thread available on
   - Add new automation to control hot water with a climate entity and an external temperature sensor on your water tank by @markchalloner. See wiki for more info.
 
 - v3.4.5
-
   - Bump api to v1.5.12 to improve performance of improved retry handling
   - Fixed issue caused by v3.4.4 that heating actuators and power tags error on load (issue [#449](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/449), [#450](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/450))
   - Fixed error setting up integration in config flow caused by session parameter being passed when no longer required (issue [#446](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/446))
@@ -144,7 +134,6 @@ For more information checkout the AMAZING community thread available on
   - Changed preset icon to HA standard
 
 - v3.4.4
-
   - Bump api to v1.5.11
   - Improved api retry handling for inconsitant errors coming from the hub causing errors in the log and entities to go unavailable (issues [#434](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/434), #436, #439)
   - Fixed Validation of translation placeholders error for German language (issue [#434](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/434)
@@ -156,12 +145,10 @@ For more information checkout the AMAZING community thread available on
   - Added number_of_trvs, number_of_trvs_locked and is_roomstat_locked attributes to climate entities (issue [#374](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/374))
 
 - v3.4.3
-
   - Fixed Warning error in logs caused by new HA2024.2 requirement to explicity support Turn On/Off for climate entities (issue [#435](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/435))
   - Bump api to v1.5.7 to fix issue setting lower target temp when in passive mode
 
 - v3.4.2
-
   - Reverted to using aiohttp for communication and resolved issues caused by HA2023.12
   - Bumped api to v1.5.5
   - Fixed issue where hub communication would error due to command characters in payload (issue [#418](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/418))
@@ -171,25 +158,21 @@ For more information checkout the AMAZING community thread available on
   - Improved error handling/logging when hub offline and command is issued
 
 - v3.4.1
-
   - Corrected error deleting schedule
   - Handle space at end of secret key and prevent error (issue [#409](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/409))
   - Updated schedule card to v1.3.2 - fixed some UI bugs, added ability to hide info and assignments via config (issue [#404](https://github.com/asantaga/wiserHomeAssistantPlatform/issues/404))
 
 - v3.4.0beta
-
   - Fixed issue in HA 2023.12 with errors reading hub
   - Add PowerTagE support (v2 hub)
   - Add tilt functions for shutters (v2 hub)
   - Fixed issue whereby non ASCII chars are removed in device/room names - issues #396
 
 - v3.3.11
-
   - Add check for overrides to prevent turning off away modewhen selecting cancel overrides when none exist (Wiser hub bug)
   - Correct sensor device class and native values to fix history not displaying issue in HA 2023.11
 
 - v3.3.10
-
   - bump api to v1.3.8 to fix passive mode error if room trv/roomstat goes offline
   - make battery sensor unavailable if no battery info provided by hub (previously showed 0%)
   - add uptime and last reset reason to Hub signal sensor
@@ -198,22 +181,18 @@ For more information checkout the AMAZING community thread available on
   - correct relative modulation level magnitude
 
 - v3.3.9
-
   - bump api to v1.3.5 to fix warning regarding async not awaited on extra config
 
 - v3.3.8
-
   - Fix extra key issue preventing loading on HA 2023.8.0 and above
 
 - v3.3.7
-
   - Fix issue with zigbee card unable to save layout in stack card
   - Updated libraries for schedule card to fix security vulnerabilities
   - Fix colours missing on on/off schedule in schedule card
   - Minor UI improvements in schedule card
 
 - v3.3.6
-
   - Improved Zigbee network card
 
 - v3.3.5
